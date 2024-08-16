@@ -20,8 +20,6 @@ const ccvAmount = document.getElementById("ccvAmount");
 
 //Outputs
 const youPayText = document.getElementById("youPayText");
-const costOfContractTotalAfterText = document.getElementById("costOfContractTotalAfterText");
-const costOfContractTotalText = document.getElementById("costOfContractTotalText");
 
 function hideAllMenus(){
     tradeinMenu.style.display = "none";
