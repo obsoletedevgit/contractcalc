@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contract calculator</title>
+
+    <link rel="stylesheet" href="/styles/index.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="nav-bar">
+            <div class="nav-header">
+                <h1>
+                    &lt;\theo haines&gt; 
+                    <h2>//Contract calculator</h2>
+                </h1>
+            </div>
+            <div class="nav-links">
+                <a href="https://theohaines.xyz">&lt;&lt; home</a>
+                <a href="">reset calculator</a>
+            </div>
+        </div>
+
+        <div class="calculator-screen">
+            <h3>Calculator</h3>
+
+            <label for="contractMonthlyCost">Contract monthly cost</label>
+            <input id="contractMonthlyCost" type="number" placeholder="Contract monthly cost"> 
+
+            <label for="contractUpfrontCost">Contract upfront cost</label>
+            <input id="contractUpfrontCost" type="number" placeholder="Contract monthly cost" value="0">
+
+            <label for="contractDuration">Contract Duration (months)</label>
+            <input id="contractDuration" type="number" placeholder="Contract duration" value="24">
+
+            <label for="tradeinSelected">Trade-in</label>
+            <select name="tradeinSelected" id="tradeinSelected" onchange="tradeinMenuChecker()">
+                <option value="none">No trade-in</option>
+                <option value="tradein">trade-in selected</option>
+            </select>
+
+            <div class="tradein-menu" id="tradeinMenu">
+                <label for="tradeinAmount">Tradein amount</label>
+                <input id="tradeinAmount" type="number" placeholder="Tradein amount" value="0">
+            </div>
+
+            <label for="cashbackType">Cashback type</label>
+            <select name="cashbackType" id="cashbackType" onchange="cashbackMenuChecker()">
+                <option value="none">No cashback</option>
+                <option value="giftcard">Giftcard</option>
+                <option value="bacs">Bacs (bank transfer)</option>
+            </select>
+
+            <div class="cashback-menu" id="cashbackMenu">
+                <label for="cashbackAmount">Cashback amount</label>
+                <input id="cashbackAmount" type="number" placeholder="Cashback amount" value="0">
+            </div>
+
+            <button onclick="calculateContract()">calculate!</button>
+        </div>
+
+        <div class="breakdown-screen" id="breakdownScreen">
+            <h3>Contract breakdown</h3>
+
+            <h2 style="color: red;" id="youPayText">You pay: £0</h2>
+
+            <br>
+
+            <h4 id="costOfContractTotalText">Cost of contract total (before reductions): £0</h4>
+            <h4 id="costOfContractTotalAfterText">Cost of contract total (after reductions): £0</h4>
+        </div>
+    </div>
+</body>
+<script src="/scripts/index.js"></script>
+</html>
