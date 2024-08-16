@@ -61,7 +61,7 @@ async function calculateContract(){
 
     var costOfContractTotal = (contractMonthlyCost.value * contractDuration.value) + parseFloat(contractUpfrontCost.value);
 
-    youPayText.textContent = Math.round(costOfContractTotal * 100) / 100
+    youPayText.textContent = "You pay: £" + Math.round(costOfContractTotal * 100) / 100
 }
 
 async function validateRequiredFields(){
