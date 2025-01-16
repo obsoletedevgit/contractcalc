@@ -13,6 +13,7 @@ const breakdownScreen = document.getElementById("breakdown-screen");
 const contractMonthlyCost = document.getElementById("contractMonthlyCost");
 const contractUpfrontCost = document.getElementById("contractUpfrontCost");
 const contractDuration = document.getElementById("contractDuration");
+const contractIncrease = document.getElementById("contractIncrease");
 
 const tradeinAmount = document.getElementById("tradeinAmount");
 const cashbackAmount = document.getElementById("cashbackAmount");
@@ -50,6 +51,7 @@ function cashbackMenuChecker(){
     //console.log(cashbackType.options[cashbackType.selectedIndex].value)
 }
 
+//UPDATED 16/01/25 -- ADDED NEW OFCOM CPI INCREASE CALCULATOR (POUND AND PENCE BASED INCREMENT)
 async function calculateContract(){
     let validated = await validateRequiredFields();
 
@@ -57,8 +59,27 @@ async function calculateContract(){
         alert("ERR: Not all fields are filled out!");
     }
 
-    var costOfContractTotal = (contractMonthlyCost.value * contractDuration.value) + parseFloat(contractUpfrontCost.value);
+    let annualIncreases = (contractDuration.value / 12);
 
+    let totalCost = 0;
+    let monthlyCostAfterInc = contractMonthlyCost.value;
+    for (let i = 0; i < annualIncreases; i++) { //For every year of contract
+        for (let x = 0; x < 12; x++) { //Check every time 12mo passes
+            totalCost = Number(totalCost + parseFloat(monthlyCostAfterInc));
+        } 
+        monthlyCostAfterInc = Number(parseFloat(monthlyCostAfterInc) + parseFloat(contractIncrease.value));
+    }
+
+    var costOfContractTotal = totalCost + parseFloat(contractUpfrontCost.value);
+
+    if (tradeinSelected.value == "tradein"){
+        costOfContractTotal = costOfContractTotal - tradeinAmount.value;
+    }
+
+    if (cashbackType.value == "bacs"){
+        costOfContractTotal = costOfContractTotal - cashbackAmount.value;
+    }
+    
     youPayText.textContent = "You pay: £" + Math.round(costOfContractTotal * 100) / 100
 }
 

@@ -187,3 +187,20 @@ button:focus {
     border: solid 2px #d0689d;
 }
 
+@media only screen and (max-width: 768px) {
+    .main-container {
+        width: 99%;
+    }
+
+    input {
+        width: 95%;
+    }
+
+    select {
+        width: 95%;
+    }
+
+    button {
+        width: 95%;
+    }
+}
