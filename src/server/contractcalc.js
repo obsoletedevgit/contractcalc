@@ -5,10 +5,7 @@ const dotenv = require('dotenv').config();
 const app = express();
 
 //Resource routes
-
 app.use('/', express.static(path.resolve("src/client")));
-app.use('/styles', express.static(path.resolve("src/client/styles")));
-app.use('/scripts', express.static(path.resolve("src/client/scripts")));
 
 //Pages routes
 app.use('/landing', express.static(path.resolve("src/client/pages/landing")));
