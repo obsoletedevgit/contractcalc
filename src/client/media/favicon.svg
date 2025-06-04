@@ -1,0 +1,13 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle (optional, but gives it a badge-like feel on some platforms) -->
+  <circle cx="128" cy="128" r="128" fill="#252540"/>
+  
+  <!-- Main shape 1 (electric blue) -->
+  <path d="M128 0C57.3075 0 0 57.3075 0 128C0 198.693 57.3075 256 128 256C198.693 256 256 198.693 256 128C256 57.3075 198.693 0 128 0ZM128 224C75.0594 224 32 180.941 32 128C32 75.0594 75.0594 32 128 32C180.941 32 224 75.0594 224 128C224 180.941 180.941 224 128 224Z" fill="#00bcd4"/>
+  
+  <!-- Main shape 2 (magenta/purple, slightly offset for overlap effect) -->
+  <path d="M128 32C75.0594 32 32 75.0594 32 128C32 180.941 75.0594 224 128 224C180.941 224 224 180.941 224 128C224 75.0594 180.941 32 128 32ZM128 224C75.0594 224 32 180.941 32 128C32 75.0594 75.0594 32 128 32C180.941 32 224 75.0594 224 128C224 180.941 180.941 224 128 224Z" fill="#9c27b0" style="mix-blend-mode: multiply; opacity: 0.8;"/>
+
+  <!-- Simple "C" cutout for clarity, overlapping slightly -->
+  <path d="M150 70 C100 70, 70 100, 70 128 C70 156, 100 186, 150 186 L150 160 C120 160, 100 145, 100 128 C100 111, 120 96, 150 96 Z" fill="white" style="opacity:0.9;"/>
+</svg>

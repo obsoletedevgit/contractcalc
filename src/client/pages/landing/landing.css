@@ -1,206 +1,698 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"); /* Added Montserrat */
+
+:root {
+	/* Color Palette: Purple Haze (Dark Mode) */
+	--bg-color: #1a1a2e; /* Very dark purple-blue */
+	--panel-bg: #252540; /* Slightly lighter warm dark purple */
+	--text-color: #ffffff; /* Pure white text */
+	--primary-accent: #00bcd4; /* Vibrant electric blue (cyan) */
+	--secondary-accent: #9c27b0; /* Striking magenta/purple */
+	--border-color: #3d3d5f; /* Dark, subtle purple border */
+	--focus-glow: rgba(0, 188, 212, 0.4); /* Blue/cyan glow */
+	--error-color: #f44336; /* Strong red for errors */
+	--you-pay-color: #d32f2f; /* Deeper red for final payment */
+	--delete-button-bg: #e74c3c; /* Retain standard red for danger */
+
+	/* Comparison Specific Colors */
+	--comparison-highlight-good: #5eb4a0; /* Green for better value */
+	--comparison-highlight-bad: #d32f2f; /* Red for worse value */
+	--comparison-highlight-neutral: #8e8e8e; /* Gray for equal value */
+	--comparison-row-odd: #2a2a4b; /* Slightly darker background for odd rows */
+	--comparison-row-even: #252540; /* Same as panel background for even rows */
+}
 
 * {
-    margin: 0;
-    padding: 0;
-    font-family: "Noto Sans", sans-serif;
-    font-optical-sizing: auto;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box; /* Modern box model */
+	font-family: "Montserrat", sans-serif; /* Changed font */
+	font-optical-sizing: auto;
 }
 
 body {
-    background-color: #1b1b1b;
-
-
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    align-items: center;
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	min-height: 100vh; /* Ensure body takes full height */
 }
 
 .main-container {
-    width:  40vw;
-    height: 80vh;
-
-    display: flex;
-    flex-direction: column;
-    row-gap: 10px;
-    align-items: center;
+	width: 100%;
+	max-width: 1100px; /* Adjusted max-width slightly for better distribution */
+	display: flex;
+	flex-direction: column;
+	gap: 20px; /* Consistent spacing between major sections */
+	margin-top: 20px; /* Space from top */
 }
 
 .nav-bar {
-    width: 100%;
-    padding-bottom: 10px;
-
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-
-    border-bottom: 3px #d0689d solid;
-}
-
-.nav-header {
-    display: flex;
-    flex-flow: row;
-    column-gap: 10px;
-
-    align-items: center;
+	width: 100%;
+	padding-bottom: 15px;
+	border-bottom: 3px solid var(--secondary-accent);
+	display: flex;
+	flex-direction: column;
+	text-align: left;
+	gap: 8px; /* Spacing between header and links */
 }
 
 .nav-header h1 {
-    color: #5eb4a0;
-}
-
-.nav-header h2 {
-    color: #313441;
+	color: var(--primary-accent);
+	font-size: 2.2em;
+	font-weight: 700;
 }
 
 .nav-links {
-    align-items: center;
+	display: flex;
+	gap: 15px; /* Spacing between links */
 }
 
 .nav-links a {
-    color: #5eb4a0;
+	color: var(--primary-accent);
+	text-decoration: none;
+	font-weight: 500;
+	transition: color 0.2s ease-in-out;
 }
 
-.calculator-screen {
-    width: 100%;
-
-    display: flex;
-    flex-flow: column;
-    row-gap: 5px;
-    justify-content: center;
-    align-items: center;
-
-    border: solid 2px #313441;
-    color: white;
+.nav-links a:hover,
+.nav-links a:focus {
+	color: var(--secondary-accent);
+	text-decoration: underline;
+	outline: none;
 }
 
-.breakdown-screen {
-    width: 100%;
-    margin-top: 10px;
-
-    display: flex;
-    flex-flow: column;
-    row-gap: 5px;
-    justify-content: center;
-    align-items: center;
-
-    border: solid 2px #313441;
-    color: white;
+/* Main content area for columns */
+.main-content {
+	display: flex;
+	flex-direction: column; /* Default to column for mobile */
+	gap: 20px; /* Space between columns on desktop, panels on mobile */
+	width: 100%;
 }
 
-.cashback-menu {
-    width: 100%;
-
-    display: flex;
-    flex-flow: column;
-    row-gap: 5px;
-    justify-content: center;
-    align-items: center;
+.left-column,
+.right-column {
+	display: flex;
+	flex-direction: column;
+	gap: 20px; /* Space between panels within a column */
 }
 
-.tradein-menu {
-    width: 100%;
-
-    display: flex;
-    flex-flow: column;
-    row-gap: 5px;
-    justify-content: center;
-    align-items: center;
+.panel {
+	width: 100%;
+	padding: 20px;
+	background-color: var(--panel-bg);
+	border: 1px solid var(--border-color);
+	border-radius: 8px; /* Soften corners */
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px; /* Spacing within panels */
 }
 
-.ccv-menu {
-    width: 100%;
-
-    display: flex;
-    flex-flow: column;
-    row-gap: 5px;
-    justify-content: center;
-    align-items: center;
+.calculator-screen h3,
+.breakdown-screen h3,
+.saved-calculations h3,
+.compare-calculations h3 {
+	color: var(--primary-accent);
+	margin-bottom: 10px;
+	font-size: 1.6em;
 }
 
-.advanced-breakdown-menu {
-    width: 100%;
-
-    display: flex;
-    flex-flow: column;
-    row-gap: 5px;
-    justify-content: center;
-    align-items: center;
+label {
+	display: block; /* Each label on a new line */
+	width: 90%;
+	text-align: left;
+	margin-top: 10px; /* Space above each label */
+	font-size: 0.95em;
+	font-weight: 400;
+	position: relative; /* For potential error messages */
 }
 
-input {
-    border: 2px #000 solid;
-    outline: none;
-
-    font-size: large;
-    width: 80%;
-    height: 30px;
-
-    background-color: #313441;
-    color: white;
-}
-
-input:focus {
-    border: solid 2px #d0689d;
-}
-
+input[type="number"],
+input[type="text"],
 select {
-    border: 2px #000 solid;
-    outline: none;
-
-    font-size: large;
-    width: 80%;
-    height: 30px;
-    background-color: #313441;
-    color: white;
+	width: 90%;
+	padding: 10px 15px;
+	border: 1px solid var(--border-color);
+	border-radius: 5px;
+	background-color: var(--bg-color); /* Slightly darker for inputs */
+	color: var(--text-color);
+	font-size: 1em;
+	outline: none;
+	transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+	-moz-appearance: textfield; /* Hide default number input arrows in Firefox */
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	/* Hide default number input arrows in Chrome/Safari */
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Validation Error Styling */
+label.validation-error {
+	color: var(--error-color);
+	font-weight: 500;
+}
+
+input.validation-error,
+select.validation-error {
+	border-color: var(--error-color);
+	box-shadow: 0 0 0 3px rgba(207, 102, 121, 0.5);
+}
+
+input[type="number"]:focus,
+input[type="text"]:focus,
 select:focus {
-    border: solid 2px #d0689d;
+	border-color: var(--secondary-accent);
+	box-shadow: 0 0 0 3px var(--focus-glow); /* Glow effect on focus */
+}
+
+/* Override focus styles for elements that are also in error state */
+input.validation-error:focus,
+select.validation-error:focus {
+	border-color: var(--error-color);
+	box-shadow: 0 0 0 3px rgba(207, 102, 121, 0.7); /* Stronger error glow */
 }
 
 option {
-    border: 2px #000 solid;
-    outline: none;
-
-    font-size: large;
-    width: 80%;
-    height: 30px;
-    background-color: #313441;
-    color: white;
+	background-color: var(--bg-color);
+	color: var(--text-color);
 }
 
 button {
-    border: 2px #000 solid;
-    outline: none;
+	width: 90%;
+	padding: 12px 20px;
+	margin-top: 20px;
+	border: none;
+	border-radius: 5px;
+	background-color: var(--primary-accent);
+	color: var(--bg-color); /* Dark text on button */
+	font-size: 1.1em;
+	font-weight: 600;
+	cursor: pointer;
+	outline: none;
+	transition: background-color 0.2s ease-in-out, transform 0.1s ease-in-out;
+}
 
-    font-size: large;
-    width: 80%;
-    height: 30px;
-
-    background-color: #313441;
-    color: white;
+button:hover {
+	background-color: #4da38f; /* Slightly darker green on hover */
+	transform: translateY(-2px);
 }
 
 button:focus {
-    border: solid 2px #d0689d;
+	box-shadow: 0 0 0 3px var(--focus-glow);
 }
 
-@media only screen and (max-width: 768px) {
-    .main-container {
-        width: 99%;
-    }
+.button-group {
+	display: flex;
+	gap: 10px; /* Space between buttons */
+	width: 90%; /* Match input width */
+	justify-content: center;
+	margin-top: 10px; /* Space above the button group */
+}
 
-    input {
-        width: 95%;
-    }
+.button-group button {
+	width: 50%; /* Each button takes half the group width */
+	margin-top: 0; /* Remove top margin from individual buttons in group */
+}
 
-    select {
-        width: 95%;
-    }
+.small-button {
+	font-size: 0.9em; /* Smaller font for these buttons */
+	padding: 8px 15px; /* Smaller padding */
+}
 
-    button {
-        width: 95%;
-    }
+.danger-button {
+	background-color: var(--delete-button-bg);
+}
+
+.danger-button:hover {
+	background-color: #c0392b; /* Darker red on hover */
+}
+
+.tradein-menu,
+.cashback-menu {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px; /* Spacing within these sub-menus */
+	border-top: 1px dashed var(--border-color); /* Subtle separator */
+	padding-top: 15px;
+	margin-top: 15px;
+}
+
+.tradein-menu label,
+.cashback-menu label {
+	margin-top: 0; /* Adjust spacing within sub-menus */
+}
+
+#youPayText {
+	color: var(--you-pay-color); /* Red for the final cost */
+	font-size: 2.5em;
+	font-weight: 700;
+	margin-top: 10px;
+	word-break: break-all; /* Prevent overflow on very small screens */
+}
+
+.disclaimer {
+	color: var(--text-color);
+	font-size: 0.8em;
+	opacity: 0.7;
+	text-align: center;
+	margin-top: 5px;
+}
+
+/* Hidden menus */
+.tradein-menu[style*="display: none"],
+.cashback-menu[style*="display: none"] {
+	display: none !important; /* Force hide */
+}
+
+/* --- Comparison Results Styling --- */
+.comparison-results {
+	width: 100%;
+	display: grid;
+	/* Use grid-template-columns for flexible widths */
+	grid-template-columns: minmax(100px, 1.2fr) minmax(80px, 1fr) minmax(
+			80px,
+			1fr
+		);
+	gap: 5px; /* Smaller gap to make it look tighter like a table */
+	text-align: center;
+	margin-top: 20px;
+	font-size: 0.9em;
+	border-collapse: collapse; /* For a table-like appearance */
+}
+
+.comparison-results .header {
+	font-weight: 700;
+	color: var(--primary-accent);
+	padding: 10px 5px; /* More padding */
+	border-bottom: 1px solid var(--border-color);
+	word-break: break-word; /* Ensure headers wrap */
+	background-color: var(--panel-bg); /* Explicit background for headers */
+	text-align: center; /* Center header text */
+}
+
+.comparison-results .metric-name.header {
+	text-align: left; /* Keep Metric header left-aligned */
+	padding-left: 10px;
+}
+
+/* Individual data cells */
+.comparison-results > div:not(.header) {
+	padding: 8px 5px; /* Consistent padding for all data cells */
+	border-radius: 0; /* Remove individual cell radius for cleaner rows */
+	display: flex; /* Use flex to vertically align content if needed */
+	align-items: center; /* Vertically center content */
+	justify-content: center; /* Horizontally center content */
+}
+
+/* Alternating row backgrounds for better readability */
+/* Target based on grid row start, assuming 3 columns per row */
+.comparison-results > div:nth-child(6n + 1),
+.comparison-results > div:nth-child(6n + 2),
+.comparison-results > div:nth-child(6n + 3) {
+	background-color: var(--comparison-row-odd);
+}
+
+.comparison-results > div:nth-child(6n + 4),
+.comparison-results > div:nth-child(6n + 5),
+.comparison-results > div:nth-child(6n + 6) {
+	background-color: var(--comparison-row-even);
+}
+
+.comparison-results .metric-name {
+	text-align: left;
+	font-weight: 500;
+	color: var(--text-color);
+	padding-left: 10px; /* Indent metric names */
+	justify-content: flex-start; /* Align metric names to start */
+}
+
+.comparison-results .value-good {
+	color: var(--comparison-highlight-good);
+	font-weight: 600;
+}
+
+.comparison-results .value-bad {
+	color: var(--comparison-highlight-bad);
+	font-weight: 600;
+}
+
+.comparison-results .value-neutral {
+	color: var(--comparison-highlight-neutral);
+	font-weight: 600;
+}
+
+/* --- Toast Notification Styles --- */
+#toastContainer {
+	position: fixed;
+	top: 20px;
+	right: 20px;
+	z-index: 1000;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	pointer-events: none;
+}
+
+.toast {
+	background-color: var(--panel-bg);
+	color: var(--text-color);
+	padding: 12px 20px;
+	border-radius: 8px;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+	min-width: 250px;
+	max-width: 350px;
+	opacity: 0;
+	transform: translateX(100%);
+	animation: slideIn 0.3s forwards,
+		fadeOut 0.3s forwards var(--toast-duration, 3s);
+	pointer-events: all;
+	display: flex;
+	align-items: center;
+	word-break: break-word;
+}
+
+.toast.success {
+	border-left: 5px solid var(--primary-accent);
+}
+
+.toast.error {
+	border-left: 5px solid var(--error-color);
+}
+
+.toast.info {
+	border-left: 5px solid var(--secondary-accent);
+}
+
+/* Animations for toasts */
+@keyframes slideIn {
+	from {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	to {
+		opacity: 0;
+		transform: translateX(100%);
+	}
+}
+
+/* --- Confirmation Modal Styles --- */
+.modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.7); /* Dark semi-transparent background */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 2000; /* Ensure it's above everything else */
+	opacity: 0; /* Start hidden for animation */
+	visibility: hidden; /* Hide from screen readers initially */
+	transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.modal-overlay.show {
+	opacity: 1;
+	visibility: visible;
+}
+
+.modal-content {
+	/* Reusing .panel styles for consistency, but adding modal-specific tweaks */
+	min-width: 300px;
+	max-width: 450px;
+	padding: 30px;
+	text-align: center;
+	display: flex; /* Override panel's default flex direction */
+	flex-direction: column;
+	gap: 20px;
+	transform: translateY(-20px); /* Start slightly up for animation */
+	transition: transform 0.3s ease-in-out;
+}
+
+.modal-overlay.show .modal-content {
+	transform: translateY(0); /* Slide down into view */
+}
+
+.modal-content h3 {
+	color: var(--primary-accent);
+	margin-bottom: 5px; /* Adjust spacing */
+}
+
+.modal-content p {
+	color: var(--text-color);
+	margin-bottom: 20px; /* Space before buttons */
+	font-size: 1.1em;
+	line-height: 1.5;
+}
+
+.modal-buttons {
+	/* Using .button-group for consistent button layout */
+	margin-top: 0; /* Override default button-group margin */
+}
+
+/* --- Icon Spacing --- */
+.material-symbols-rounded.icon-left {
+	margin-right: 8px; /* Space between icon and text */
+	vertical-align: middle; /* Align icon vertically with text */
+	font-size: 1.1em; /* Make icons slightly larger than surrounding text if needed */
+	transform: translateY(
+		-1px
+	); /* Minor adjustment for perfect vertical alignment */
+}
+
+/* Specific adjustments for icons inside buttons */
+button .material-symbols-rounded.icon-left {
+	font-size: 1em; /* Buttons usually have larger text, so icon might match text size */
+	transform: translateY(
+		0
+	); /* Remove translateY from button icons if button text is already centered */
+}
+
+/* Responsive Design */
+
+/* Desktop layout (>= 1024px) */
+@media only screen and (min-width: 1024px) {
+	.main-container {
+		max-width: 1200px; /* Allows for 2 columns with larger panels */
+	}
+
+	.main-content {
+		flex-direction: row; /* Make it a row for desktop */
+		align-items: flex-start; /* Align columns to the top */
+	}
+
+	.left-column {
+		flex: 1.5; /* Left column (calculator + breakdown) takes more space */
+		min-width: 450px; /* Ensure calculator has enough width */
+	}
+
+	.right-column {
+		flex: 1; /* Right column (saved + compare) takes less space */
+		min-width: 350px; /* Ensure it has enough width */
+	}
+
+	/* Ensure all panels inside columns fill their space */
+	.left-column > .panel,
+	.right-column > .panel {
+		width: 100%;
+	}
+
+	.panel {
+		padding: 25px; /* Slightly more padding for desktop */
+	}
+
+	/* Adjust width of form elements for desktop columns */
+	.calculator-screen label,
+	.calculator-screen input[type="number"],
+	.calculator-screen input[type="text"],
+	.calculator-screen select,
+	.calculator-screen button,
+	.calculator-screen .button-group,
+	.saved-calculations label,
+	.saved-calculations input[type="number"],
+	.saved-calculations input[type="text"],
+	.saved-calculations select,
+	.saved-calculations button,
+	.saved-calculations .button-group,
+	.compare-calculations label,
+	.compare-calculations input[type="number"],
+	.compare-calculations input[type="text"],
+	.compare-calculations select,
+	.compare-calculations button,
+	.compare-calculations .button-group {
+		width: 90%; /* Maintain 90% width within their panel */
+	}
+	.compare-calculations button.small-button {
+		margin-top: 10px; /* Adjust button margin for compare section */
+	}
+}
+
+/* Tablet layout (768px - 1023px) - Stacks columns vertically */
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+	.main-container {
+		max-width: 90%;
+	}
+	.main-content {
+		flex-direction: column; /* Stack columns on tablet */
+		align-items: center;
+	}
+	.left-column,
+	.right-column {
+		width: 100%; /* Columns take full width */
+	}
+	.panel {
+		padding: 25px;
+	}
+	.comparison-results {
+		/* For mobile, keep 3 columns but make them more flexible, or just stack headers */
+		grid-template-columns: minmax(70px, 1.2fr) minmax(60px, 1fr) minmax(
+				60px,
+				1fr
+			); /* Keep 3 columns but tighter */
+		font-size: 0.8em; /* Slightly smaller font for mobile comparison */
+		padding-right: 0; /* Adjust padding for tight mobile */
+	}
+
+	.comparison-results .header {
+		padding: 8px 3px; /* Smaller header padding for mobile */
+	}
+
+	.comparison-results .header.contract-name {
+		grid-column: span 1; /* Reset span for mobile, they will go one after another */
+		/* Remove specific nth-of-type styling here, let grid handle positioning */
+	}
+
+	.comparison-results .metric-name {
+		padding-left: 5px; /* Less indent on mobile */
+	}
+
+	.comparison-results > div:not(.header) {
+		padding: 5px 3px; /* Smaller padding for data cells on mobile */
+	}
+}
+
+/* Mobile layout (<= 767px) - Stacks columns vertically */
+@media only screen and (max-width: 767px) {
+	body {
+		padding: 10px;
+	}
+
+	.main-container {
+		width: 100%;
+		margin-top: 0;
+	}
+
+	.nav-header h1 {
+		font-size: 1.8em;
+	}
+
+	.nav-links {
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 5px;
+	}
+
+	.panel {
+		padding: 15px;
+		gap: 10px;
+	}
+
+	label,
+	input[type="number"],
+	input[type="text"],
+	select,
+	button {
+		width: 95%; /* Take more width on smaller screens */
+	}
+
+	input[type="number"],
+	input[type="text"],
+	select {
+		padding: 8px 12px;
+		font-size: 0.95em;
+	}
+
+	button {
+		padding: 10px 15px;
+		font-size: 1em;
+	}
+
+	.button-group {
+		width: 95%; /* Match input width */
+	}
+
+	.compare-calculations button.small-button {
+		margin-top: 10px; /* Adjust button margin for compare section */
+	}
+
+	#youPayText {
+		font-size: 2em;
+	}
+
+	#toastContainer {
+		top: 10px;
+		right: 10px;
+		left: 10px; /* Make it full width with padding on small screens */
+		align-items: center; /* Center toasts */
+	}
+
+	.toast {
+		max-width: 95%; /* Adjust max width for mobile */
+		min-width: unset;
+	}
+
+	.comparison-results {
+		/* For mobile, keep 3 columns but make them more flexible, or just stack headers */
+		grid-template-columns: minmax(70px, 1.2fr) minmax(60px, 1fr) minmax(
+				60px,
+				1fr
+			); /* Keep 3 columns but tighter */
+		font-size: 0.8em; /* Slightly smaller font for mobile comparison */
+		padding-right: 0; /* Adjust padding for tight mobile */
+	}
+
+	.comparison-results .header {
+		padding: 8px 3px; /* Smaller header padding for mobile */
+	}
+
+	.comparison-results .header.contract-name {
+		grid-column: span 1; /* Reset span for mobile, they will go one after another */
+		/* Remove specific nth-of-type styling here, let grid handle positioning */
+	}
+
+	.comparison-results .metric-name {
+		padding-left: 5px; /* Less indent on mobile */
+	}
+
+	.comparison-results > div:not(.header) {
+		padding: 5px 3px; /* Smaller padding for data cells on mobile */
+	}
+}
+
+/* Responsive adjustment for modal */
+@media only screen and (max-width: 600px) {
+	.modal-content {
+		width: 90%; /* Take more width on small screens */
+		padding: 20px;
+	}
 }
